@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", "Helvetica Neue", Arial, ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  --font-display: "Space Grotesk", sans-serif;
+
+  --color-django-green: #092e20;
+  --color-django-neon: #10c061;
+  --color-neon-purple: #bc13fe;
+  --color-cyber-white: #e0e0e0;
+  --color-charcoal: #121212;
+}
+
+@layer base {
+  body {
+    @apply bg-charcoal text-cyber-white font-sans selection:bg-django-neon/30 selection:text-django-neon overflow-hidden;
+    cursor: none;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-display tracking-tight;
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-white/5 backdrop-blur-xl border border-white/10;
+  }
+  
+  .glow-green {
+    text-shadow: 0 0 20px rgba(16, 192, 97, 0.5);
+  }
+
+  .glow-purple {
+    text-shadow: 0 0 20px rgba(188, 19, 254, 0.5);
+  }
+
+  .border-glow-green {
+    box-shadow: 0 0 15px rgba(16, 192, 97, 0.2);
+  }
+
+  .border-glow-purple {
+    box-shadow: 0 0 15px rgba(188, 19, 254, 0.2);
+  }
+}
+
+/* Custom Cursor */
+#custom-cursor {
+  width: 40px;
+  height: 40px;
+  border: 2px solid theme('colors.django-neon');
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  transition: transform 0.1s ease-out, width 0.2s, height 0.2s, background-color 0.2s;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#custom-cursor::after {
+  content: '';
+  width: 4px;
+  height: 4px;
+  background-color: theme('colors.django-neon');
+  border-radius: 50%;
+}
+
+#custom-cursor.hovering {
+  width: 60px;
+  height: 60px;
+  background-color: rgba(16, 192, 97, 0.1);
+  border-width: 1px;
+}
+
+/* Hide scrollbar but keep functionality */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.hero-logo-bg {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 320px;
+  font-weight: 900;
+  color: transparent;
+  -webkit-text-stroke: 1px theme('colors.django-neon');
+  filter: drop-shadow(0 0 20px rgba(16, 192, 97, 0.3));
+  opacity: 0.15;
+  z-index: 0;
+  pointer-events: none;
+  font-family: theme('fontFamily.display');
+}
